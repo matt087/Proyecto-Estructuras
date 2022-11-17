@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <vector>
 
 using namespace std;
 
@@ -13,14 +14,7 @@ struct numeros
 	 int n6;
 };
 
-time_t tiempo()
-{
-	time_t t1=0;
-	time_t
-		
-}
-
-void merge(numeros A[],int inicio, int mitad, int final)
+void merge(vector <numeros> A,int inicio, int mitad, int final)
 {
     int i, j, k;
     int elementosIzq = mitad - inicio + 1;
@@ -46,11 +40,11 @@ void merge(numeros A[],int inicio, int mitad, int final)
 	{
         if(izquierda[i].n5 <= derecha[j].n5)
 		{
-            A[k].n5 = izquierda[i].n5;
+            A.at(k).n5 = izquierda[i].n5;
             i++;
         }else
 		{
-            A[k].n5 = derecha[j].n5;
+            A.at(k).n5 = derecha[j].n5;
             j++;
         }
         k++;
@@ -58,20 +52,20 @@ void merge(numeros A[],int inicio, int mitad, int final)
 
     while(j < elementosDer)
 	{
-        A[k].n5 = derecha[j].n5;
+        A.at(k).n5 = derecha[j].n5;
         j++;
         k++;
     }
 
     while(i < elementosIzq)
 	{
-        A[k].n5 = izquierda[i].n5;
+        A.at(k).n5 = izquierda[i].n5;
         i++;
         k++;
     }
 
 }
-void mergeSort(numeros A[],int inicio, int final)
+void mergeSort(vector<numeros> A,int inicio, int final)
 {
     if(inicio < final)
 	{
@@ -89,23 +83,23 @@ void swap(int &a,int &b)
     b = aux;
 }
 
-int particion(numeros A[],int inicio, int fin)
+int particion(vector <numeros> A,int inicio, int fin)
 {
-    int pivote = A[inicio].n6;
+    int pivote = A.at(inicio).n6;
     int i = inicio + 1;
     for(int j = i; j <= fin; j++)
 	{
-        if(A[j].n6 < pivote)
+        if(A.at(j).n6 < pivote)
 		{
-            swap(A[i].n6,A[j].n6);
+            swap(A.at(i).n6,A.at(j).n6);
             i++;
         }
     }
-    swap(A[inicio],A[i-1]);
+    swap(A.at(inicio).n6,A.at(i-1).n6);
     return i-1;
 }
 
-void quickSort(numeros A[], int inicio, int fin)
+void quickSort(vector <numeros> A, int inicio, int fin)
 {
     if(inicio < fin){
         int pivote = particion(A,inicio,fin);
@@ -118,17 +112,19 @@ int main()
 	srand(time(NULL));
 	int op, opo;
 	int numero;
-	long int tam = 40000, aux, i, j;
-	numeros A[tam];
-	for(long int i=0; i<tam; i++)
+	const long tam = 4000;
+	long aux, i, j;
+	vector <numeros> A(tam);
+	for(long i=0; i<tam; i++)
 	{
 		numero = 1+rand()%(5001-1);
-		A[i].n1 = numero;
-		A[i].n2 = numero;
-		A[i].n3 = numero;
-		A[i].n4 = numero;
-		A[i].n5 = numero;
-		A[i].n6 = numero;
+		A.at(i).n1= numero;
+		A.at(i).n2= numero;
+		A.at(i).n3= numero;
+		A.at(i).n4= numero;
+		A.at(i).n5= numero;
+		A.at(i).n6= numero;
+		
 	}
 	do
 	{
@@ -170,14 +166,15 @@ int main()
 							{
 								for(j=0; j<(tam -1);j++)
 								{
-									if(A[j].n1>A[j+1].n1)
+									if(A.at(j).n1>A.at(j+1).n1)
 									{
-										aux=A[j].n1;
-										A[j].n1=A[j+1].n1;
-										A[j+1].n1=aux;	
+										aux=A.at(j).n1;
+										A.at(j).n1=A.at(j+1).n1;
+										A.at(j+1).n1=aux;	
 									}
 								}
 							}
+							cout<<"\nARREGLO ORDENADO"<<endl;
 						break;
 						case 2:
 							long int minimo;
@@ -186,33 +183,40 @@ int main()
 								minimo=i;
 								for(j=i+1; j<tam;j++)
 								{
-									if(A[j].n2<A[minimo].n2)
+									if(A.at(j).n2<A.at(minimo).n2)
 									minimo=j;
 								}
 								if (minimo!=i)
 								{
-									aux=A[i].n2;
-									A[i].n2=A[minimo].n2;
-									A[minimo].n2=aux;
+									aux=A.at(i).n2;
+									A.at(i).n2=A.at(minimo).n2;
+									A.at(minimo).n2=aux;
 								}
 							}
+							cout<<"\nARREGLO ORDENADO"<<endl;
 						break;
 						case 3:
-							long int valor;
+							long valor;
 							for(i=1;i<tam;i++)
 							{
-								valor=A[i].n3;
+								cout<<i<< " ";
+								valor=A.at(i).n3;
 								j=i;
-								while(j>0 && A[j-1].n3>valor)
+								while(j>0 && A.at(j-1).n3>valor)
 								{
-									A[j].n3=A[j-1].n3;
+									A.at(j).n3=A.at(j-1).n3;
 									j--;
 								};
-								A[j].n3=valor;
+								A.at(j).n3=valor;
 							}
+							for(i=0; i<tam; i++)
+							{
+								cout<<A.at(i).n3<<" ";
+							}
+							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 4:
-							long int incremento;
+							long incremento;
 							incremento=tam/2;
 							while(incremento>0){
 								for(i=incremento;i<tam;i++)
@@ -228,19 +232,22 @@ int main()
 								}
 								incremento=incremento/2;
 							}
+							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 5:
 							mergeSort(A, 0, tam-1);
+							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;	
 						case 6:
 							quickSort(A,0,tam-1);
+							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 							
 					}
 				}while(opo!=8);
 				break;
 		}
-	} while(op!=3);
+	} while(op!=7);
 		
 	return 0;
 }
