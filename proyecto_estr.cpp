@@ -221,14 +221,14 @@ int main()
 							while(incremento>0){
 								for(i=incremento;i<tam;i++)
 								{
-									aux=A[i].n4;
+									aux=A.at(i).n4;
 									j=i-incremento;
-									while(j>=0 && aux<A[j].n4)
+									while(j>=0 && aux<A.at(j).n4)
 									{
-										A[j+incremento].n4=A[j].n4;
+										A.at(j+incremento).n4=A.at(j).n4;
 										j=j-incremento;
 									}
-									A[j+incremento].n4=aux;
+									A.at(j+incremento).n4=aux;
 								}
 								incremento=incremento/2;
 							}
@@ -241,8 +241,7 @@ int main()
 						case 6:
 							quickSort(A,0,tam-1);
 							cout<<"\nARREGLO ORDENADO"<<endl;
-							break;
-							
+							break;		
 					}
 				}while(opo!=8);
 				break;
