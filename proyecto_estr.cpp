@@ -13,7 +13,21 @@ struct numeros
 	 int n5;
 	 int n6;
 };
-
+void bubble(long i, long j, const long tam, long aux, vector<numeros> A)
+{
+	for(i=0;i<tam;i++)
+	{
+		for(j=0; j<(tam -1);j++)
+		{
+			if(A.at(j).n1>A.at(j+1).n1)
+			{
+				aux=A.at(j).n1;
+				A.at(j).n1=A.at(j+1).n1;
+				A.at(j+1).n1=aux;	
+			}
+		}
+	}
+}
 void merge(vector <numeros> A,int inicio, int mitad, int final)
 {
     int i, j, k;
@@ -75,14 +89,12 @@ void mergeSort(vector<numeros> A,int inicio, int final)
         merge(A,inicio,mitad,final);
     }
 }
-
 void swap(int &a,int &b)
 {
     int aux = a;
     a = b;
     b = aux;
 }
-
 int particion(vector <numeros> A,int inicio, int fin)
 {
     int pivote = A.at(inicio).n6;
@@ -98,7 +110,6 @@ int particion(vector <numeros> A,int inicio, int fin)
     swap(A.at(inicio).n6,A.at(i-1).n6);
     return i-1;
 }
-
 void quickSort(vector <numeros> A, int inicio, int fin)
 {
     if(inicio < fin){
@@ -107,6 +118,7 @@ void quickSort(vector <numeros> A, int inicio, int fin)
         quickSort(A,pivote+1,fin);
     }
 }
+
 int main()
 {
 	srand(time(NULL));
@@ -162,18 +174,7 @@ int main()
 					switch(opo)
 					{
 						case 1: 
-							for(i=0;i<tam;i++)
-							{
-								for(j=0; j<(tam -1);j++)
-								{
-									if(A.at(j).n1>A.at(j+1).n1)
-									{
-										aux=A.at(j).n1;
-										A.at(j).n1=A.at(j+1).n1;
-										A.at(j+1).n1=aux;	
-									}
-								}
-							}
+							bubble(i, j, tam, aux, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 						break;
 						case 2:
