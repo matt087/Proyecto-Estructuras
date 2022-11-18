@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <chrono>
 
 using namespace std;
 
@@ -14,8 +15,10 @@ struct numeros
 	 int n6;
 };
 
-void bubble(long i, long j, const long tam, long aux, vector<numeros> A)
+float bubble(long i, long j, const long tam, long aux, vector<numeros> A)
 {
+	clock_t t;
+	auto start = chrono::system_clock::now();
 	for(i=0;i<tam;i++)
 	{
 		for(j=0; j<(tam -1);j++)
@@ -27,11 +30,17 @@ void bubble(long i, long j, const long tam, long aux, vector<numeros> A)
 				A.at(j+1).n1=aux;	
 			}
 		}
-	}	
+	}
+	auto end = chrono::system_clock::now();
+	chrono::duration<float,milli> duration = end - start;
+	float tiempo = duration.count();	
+	return tiempo;
 }
-void selection(const long tam, long i, long j, long aux, vector <numeros> A)
+float selection(const long tam, long i, long j, long aux, vector <numeros> A)
 {
 	long int minimo;
+	clock_t t;
+	auto start = chrono::system_clock::now();
 	for(i=0; i<tam-1; i++)
 	{
 		minimo=i;
@@ -47,10 +56,16 @@ void selection(const long tam, long i, long j, long aux, vector <numeros> A)
 			A.at(minimo).n2=aux;
 		}
 	}
+	auto end = chrono::system_clock::now();
+	chrono::duration<float,milli> duration = end - start;
+	float tiempo = duration.count();	
+	return tiempo;
 }
-void insertion(const long tam, long i, long j, vector <numeros> A)
+float insertion(const long tam, long i, long j, vector <numeros> A)
 {
 	long valor;
+	clock_t t;
+	auto start = chrono::system_clock::now();
 	for(i=1;i<tam;i++)
 	{
 		valor=A.at(i).n3;
@@ -62,10 +77,16 @@ void insertion(const long tam, long i, long j, vector <numeros> A)
 		};
 		A.at(j).n3=valor;
 	}
+	auto end = chrono::system_clock::now();
+	chrono::duration<float,milli> duration = end - start;
+	float tiempo = duration.count();	
+	return tiempo;
 }
-void shell(const long tam, long i, long j, long aux, vector <numeros> A)
+float shell(const long tam, long i, long j, long aux, vector <numeros> A)
 {
 	long incremento;
+	clock_t t;
+	auto start = chrono::system_clock::now();
 	incremento=tam/2;
 	while(incremento>0)
 	{
@@ -82,6 +103,10 @@ void shell(const long tam, long i, long j, long aux, vector <numeros> A)
 		}
 		incremento/=2;
 	}
+	auto end = chrono::system_clock::now();
+	chrono::duration<float,milli> duration = end - start;
+	float tiempo = duration.count();	
+	return tiempo;
 }
 void merge(vector <numeros> A,int inicio, int mitad, int final)
 {
@@ -134,8 +159,10 @@ void merge(vector <numeros> A,int inicio, int mitad, int final)
     }
 
 }
-void mergeSort(vector<numeros> A,int inicio, int final)
+float mergeSort(vector<numeros> A,int inicio, int final)
 {
+	clock_t t;
+	auto start = chrono::system_clock::now();
     if(inicio < final)
 	{
         int mitad = inicio + (final - inicio)/2;
@@ -143,6 +170,10 @@ void mergeSort(vector<numeros> A,int inicio, int final)
         mergeSort(A,mitad+1,final);
         merge(A,inicio,mitad,final);
     }
+	auto end = chrono::system_clock::now();
+	chrono::duration<float,milli> duration = end - start;
+	float tiempo = duration.count();	
+	return tiempo;
 }
 void swap(int &a,int &b)
 {
@@ -165,13 +196,19 @@ int particion(vector <numeros> A,int inicio, int fin)
     swap(A.at(inicio).n6,A.at(i-1).n6);
     return i-1;
 }
-void quickSort(vector <numeros> A, int inicio, int fin)
+float quickSort(vector <numeros> A, int inicio, int fin)
 {
+	clock_t t;
+	auto start = chrono::system_clock::now();
     if(inicio < fin){
         int pivote = particion(A,inicio,fin);
         quickSort(A,inicio,pivote-1);
         quickSort(A,pivote+1,fin);
     }
+	auto end = chrono::system_clock::now();
+	chrono::duration<float,milli> duration = end - start;
+	float tiempo = duration.count();	
+	return tiempo;
 }
 
 int main()
@@ -179,8 +216,9 @@ int main()
 	srand(time(NULL));
 	int op, opo;
 	int numero;
-	const long tam = 4000;
+	const long tam = 40000;
 	long aux, i, j;
+	float t1=0, t2=0, t3=0, t4=0, t5=0, t6=0;
 	vector <numeros> A(tam);
 	for(long i=0; i<tam; i++)
 	{
@@ -229,38 +267,43 @@ int main()
 					switch(opo)
 					{
 						case 1: 
-							bubble(i, j, tam, aux, A);
+							t1 = bubble(i, j, tam, aux, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
-						break;
+							break;
 						case 2:
-							selection(tam, i, j, aux, A);
+							t2 = selection(tam, i, j, aux, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 						break;
 						case 3:
-							insertion(tam, i, j, A);
+							t3 = insertion(tam, i, j, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 4:
-							shell(tam, i, j, aux, A);
+							t4 = shell(tam, i, j, aux, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 5:
-							mergeSort(A, 0, tam-1);
+							t5 = mergeSort(A, 0, tam-1);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;	
 						case 6:
-							quickSort(A,0,tam-1);
+							t6 = quickSort(A,0,tam-1);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 7:
 							cout<<"\tTABLA DE TIEMPOS"<<endl;	
-							cout<<"Metodo Burbuja: ";	
+							cout<<"1) Metodo de la Burbuja: "<<t1<<"milisegundos"<<endl;
+							cout<<"2) Metodo de Seleccion: "<<t2<<"milisegundos"<<endl;
+							cout<<"3) Metodo de Insercion: "<<t3<<"milisegundos"<<endl;
+							cout<<"4) Metodo Shell: "<<t4<<"milisegundos"<<endl;
+							cout<<"5) Metodo MergeSort: "<<t5<<"milisegundos"<<endl;
+							cout<<"6) Metodo Quick Sort: "<<t6<<"milisegundos"<<endl;	
 							break;
 					}
 				}while(opo!=8);
 				break;
 		}
-	} while(op!=7);
+	} while(op!=3);
 		
 	return 0;
 }
