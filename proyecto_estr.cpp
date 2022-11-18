@@ -216,10 +216,11 @@ int main()
 	srand(time(NULL));
 	int op, opo;
 	int numero;
-	const long tam = 40000;
+	const long tam = 20;
 	long aux, i, j;
 	float t1=0, t2=0, t3=0, t4=0, t5=0, t6=0;
 	vector <numeros> A(tam);
+	
 	for(long i=0; i<tam; i++)
 	{
 		numero = 1+rand()%(5001-1);
@@ -291,13 +292,13 @@ int main()
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 7:
-							cout<<"\tTABLA DE TIEMPOS"<<endl;	
-							cout<<"1) Metodo de la Burbuja: "<<t1<<"milisegundos"<<endl;
-							cout<<"2) Metodo de Seleccion: "<<t2<<"milisegundos"<<endl;
-							cout<<"3) Metodo de Insercion: "<<t3<<"milisegundos"<<endl;
-							cout<<"4) Metodo Shell: "<<t4<<"milisegundos"<<endl;
-							cout<<"5) Metodo MergeSort: "<<t5<<"milisegundos"<<endl;
-							cout<<"6) Metodo Quick Sort: "<<t6<<"milisegundos"<<endl;	
+							cout<<"\n\tTABLA DE TIEMPOS"<<endl;	
+							cout<<"1) Metodo de la Burbuja: "<<t1<<" milisegundos"<<endl;
+							cout<<"2) Metodo de Seleccion: "<<t2<<" milisegundos"<<endl;
+							cout<<"3) Metodo de Insercion: "<<t3<<" milisegundos"<<endl;
+							cout<<"4) Metodo Shell: "<<t4<<" milisegundos"<<endl;
+							cout<<"5) Metodo MergeSort: "<<t5<<" milisegundos"<<endl;
+							cout<<"6) Metodo Quick Sort: "<<t6<<" milisegundos"<<endl;	
 							break;
 					}
 				}while(opo!=8);
