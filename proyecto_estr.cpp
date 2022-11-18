@@ -241,7 +241,10 @@ int main()
 						case 6:
 							quickSort(A,0,tam-1);
 							cout<<"\nARREGLO ORDENADO"<<endl;
-							break;		
+							break;
+						case 7:
+							cout<<"\tTABLA DE TIEMPOS"<<endl;		
+							break;
 					}
 				}while(opo!=8);
 				break;
