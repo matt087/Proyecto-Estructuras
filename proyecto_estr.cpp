@@ -26,6 +26,26 @@ void bubble(long i, long j, const long tam, long aux, vector<numeros> A)
 				A.at(j+1).n1=aux;	
 			}
 		}
+	}	
+}
+
+void selection(const long tam, long i, long j, long aux, vector <numeros> A)
+{
+	long int minimo;
+	for(i=0; i<tam-1; i++)
+	{
+		minimo=i;
+		for(j=i+1; j<tam;j++)
+		{
+			if(A.at(j).n2<A.at(minimo).n2)
+			minimo=j;
+		}
+		if (minimo!=i)
+		{
+			aux=A.at(i).n2;
+			A.at(i).n2=A.at(minimo).n2;
+			A.at(minimo).n2=aux;
+		}
 	}
 }
 void merge(vector <numeros> A,int inicio, int mitad, int final)
@@ -178,22 +198,7 @@ int main()
 							cout<<"\nARREGLO ORDENADO"<<endl;
 						break;
 						case 2:
-							long int minimo;
-							for(i=0; i<tam-1; i++)
-							{
-								minimo=i;
-								for(j=i+1; j<tam;j++)
-								{
-									if(A.at(j).n2<A.at(minimo).n2)
-									minimo=j;
-								}
-								if (minimo!=i)
-								{
-									aux=A.at(i).n2;
-									A.at(i).n2=A.at(minimo).n2;
-									A.at(minimo).n2=aux;
-								}
-							}
+							selection(tam, i, j, aux, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 						break;
 						case 3:
@@ -209,10 +214,6 @@ int main()
 									j--;
 								};
 								A.at(j).n3=valor;
-							}
-							for(i=0; i<tam; i++)
-							{
-								cout<<A.at(i).n3<<" ";
 							}
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
