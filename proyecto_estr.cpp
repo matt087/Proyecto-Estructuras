@@ -243,7 +243,8 @@ int main()
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 7:
-							cout<<"\tTABLA DE TIEMPOS"<<endl;		
+							cout<<"\tTABLA DE TIEMPOS"<<endl;	
+							cout<<"Metodo Burbuja: ";	
 							break;
 					}
 				}while(opo!=8);
