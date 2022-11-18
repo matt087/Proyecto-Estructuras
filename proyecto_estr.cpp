@@ -13,6 +13,7 @@ struct numeros
 	 int n5;
 	 int n6;
 };
+
 void bubble(long i, long j, const long tam, long aux, vector<numeros> A)
 {
 	for(i=0;i<tam;i++)
@@ -28,7 +29,6 @@ void bubble(long i, long j, const long tam, long aux, vector<numeros> A)
 		}
 	}	
 }
-
 void selection(const long tam, long i, long j, long aux, vector <numeros> A)
 {
 	long int minimo;
@@ -46,6 +46,41 @@ void selection(const long tam, long i, long j, long aux, vector <numeros> A)
 			A.at(i).n2=A.at(minimo).n2;
 			A.at(minimo).n2=aux;
 		}
+	}
+}
+void insertion(const long tam, long i, long j, vector <numeros> A)
+{
+	long valor;
+	for(i=1;i<tam;i++)
+	{
+		valor=A.at(i).n3;
+		j=i;
+		while(j>0 && A.at(j-1).n3>valor)
+		{
+			A.at(j).n3=A.at(j-1).n3;
+			j--;
+		};
+		A.at(j).n3=valor;
+	}
+}
+void shell(const long tam, long i, long j, long aux, vector <numeros> A)
+{
+	long incremento;
+	incremento=tam/2;
+	while(incremento>0)
+	{
+		for(i=incremento;i<tam;i++)
+		{
+			aux=A.at(i).n4;
+			j=i-incremento;
+			while(j>=0 && aux<A.at(j).n4)
+			{
+				A.at(j+incremento).n4=A.at(j).n4;
+				j=j-incremento;
+			}
+			A.at(j+incremento).n4=aux;
+		}
+		incremento/=2;
 	}
 }
 void merge(vector <numeros> A,int inicio, int mitad, int final)
@@ -156,8 +191,8 @@ int main()
 		A.at(i).n4= numero;
 		A.at(i).n5= numero;
 		A.at(i).n6= numero;
-		
 	}
+	
 	do
 	{
 		cout<<"\n\t* * *MENU* * *"<<endl;
@@ -202,38 +237,11 @@ int main()
 							cout<<"\nARREGLO ORDENADO"<<endl;
 						break;
 						case 3:
-							long valor;
-							for(i=1;i<tam;i++)
-							{
-								cout<<i<< " ";
-								valor=A.at(i).n3;
-								j=i;
-								while(j>0 && A.at(j-1).n3>valor)
-								{
-									A.at(j).n3=A.at(j-1).n3;
-									j--;
-								};
-								A.at(j).n3=valor;
-							}
+							insertion(tam, i, j, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 4:
-							long incremento;
-							incremento=tam/2;
-							while(incremento>0){
-								for(i=incremento;i<tam;i++)
-								{
-									aux=A.at(i).n4;
-									j=i-incremento;
-									while(j>=0 && aux<A.at(j).n4)
-									{
-										A.at(j+incremento).n4=A.at(j).n4;
-										j=j-incremento;
-									}
-									A.at(j+incremento).n4=aux;
-								}
-								incremento=incremento/2;
-							}
+							shell(tam, i, j, aux, A);
 							cout<<"\nARREGLO ORDENADO"<<endl;
 							break;
 						case 5:
